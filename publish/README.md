@@ -1,6 +1,6 @@
 # Smoke collision
 
-Client side mod that makes the smoke ignore certain structures.
+Client side mod that makes the smoke ignore certain structures. Also allows changing the smoke size.
 
 The configuration can synced by also installing on the server.
 
@@ -25,7 +25,15 @@ By default following structures let the smoke pass:
 - Wood ladder
 - Wood stair
 
+There are also two settings to change the smoke size:
+
+- Smoke size multiplier: Affects both visual and the collider size.
+- Collider size multiplier: Affects only the collider size.
+
 # Changelog
 
-- v1.0: 
+- v1.1
+	- Adds new settings for changing the smoke size.
+
+- v1.0
 	- Initial release.
