@@ -1,9 +1,9 @@
 {
   "name": "Smoke_Collision",
-  "version_number": "1.1.0",
+  "version_number": "1.2.0",
   "website_url": "https://github.com/JereKuusela/valheim-smoke_collision",
   "description": "Allows smoke to pass through iron cage floors and other similar structures. Also allows changing the smoke size.",
   "dependencies": [
-    "denikson-BepInExPack_Valheim-5.4.1900"
+    "denikson-BepInExPack_Valheim-5.4.1901"
   ]
 }

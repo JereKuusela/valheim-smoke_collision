@@ -1,14 +1,10 @@
 # Smoke collision
 
-Client side mod that makes the smoke ignore certain structures. Also allows changing the smoke size.
+Makes the smoke ignore certain structures. Also allows changing the smoke size and properties.
 
-The configuration can synced by also installing on the server.
+Install on the client (modding [guide](https://youtu.be/L9ljm2eKLrk)).
 
-# Manual Installation:
-
-1. Install the [BepInExPack Valheim](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/).
-2. Download the latest zip.
-3. Extract it in the \<GameDirectory\>\BepInEx\plugins\ folder.
+Install on the server if want to sync the config.
 
 # Configuration
 
@@ -25,12 +21,23 @@ By default following structures let the smoke pass:
 - Wood ladder
 - Wood stair
 
-There are also two settings to change the smoke size:
+There are also settings to change smoke properties:
 
-- Smoke size multiplier: Affects both visual and the collider size.
-- Collider size multiplier: Affects only the collider size.
+- Collider size multiplier (default `1`): Affects only the collider size.
+- Fade time (default `2`): Seconds to disappear after max amount or max duration.
+- Force (default `2`): Multiplies acceleration (how quickly target velocity is reached).
+- Max amount (default `100`): Maximum amount of smoke.
+- Max duration (default `60`): Seconds until starting to fade.
+- Random horizontal velocity (default `0.15`): Random horizontal velocity.
+- Smoke size multiplier (default `1`): Affects both visual and the collider size.
+- Vertical velocity (default `0.75`): Maximum vertical velocity.
 
 # Changelog
+
+- v1.2
+	- Adds settings for max amount, max duration, fade time, force, vertical velocity and horizontal velocity.
+	- Changes all smoke to disappear when changing settings.
+	- Changes the GUID.
 
 - v1.1
 	- Adds new settings for changing the smoke size.
