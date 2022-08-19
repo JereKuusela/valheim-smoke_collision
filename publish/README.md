@@ -34,6 +34,9 @@ There are also settings to change smoke properties:
 
 # Changelog
 
+- v1.3
+	- Fixes some object ids not working.
+
 - v1.2
 	- Adds settings for max amount, max duration, fade time, force, vertical velocity and horizontal velocity.
 	- Changes all smoke to disappear when changing settings.

@@ -10,12 +10,12 @@ public class SmokeCollision : BaseUnityPlugin {
   public const string LEGACY_GUID = "valheim.jere.smoke_collision";
   public const string GUID = "smoke_collision";
   public const string NAME = "Smoke Collision";
-  public const string VERSION = "1.2";
+  public const string VERSION = "1.3";
   ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,
     CurrentVersion = VERSION,
-    MinimumRequiredVersion = VERSION
+    MinimumRequiredVersion = "1.2"
   };
   public void Awake() {
     var legacyConfig = Path.Combine(Path.GetDirectoryName(Config.ConfigFilePath), $"{LEGACY_GUID}.cfg");
