@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Reflection.Emit;
 using BepInEx;
 using HarmonyLib;
@@ -7,28 +6,18 @@ using UnityEngine;
 namespace SmokeCollision;
 [BepInPlugin(GUID, NAME, VERSION)]
 public class SmokeCollision : BaseUnityPlugin {
-  public const string LEGACY_GUID = "valheim.jere.smoke_collision";
   public const string GUID = "smoke_collision";
   public const string NAME = "Smoke Collision";
-  public const string VERSION = "1.3";
+  public const string VERSION = "1.4";
   ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,
     CurrentVersion = VERSION,
-    MinimumRequiredVersion = "1.2"
+    MinimumRequiredVersion = "1.4"
   };
   public void Awake() {
-    var legacyConfig = Path.Combine(Path.GetDirectoryName(Config.ConfigFilePath), $"{LEGACY_GUID}.cfg");
-    var config = Path.Combine(Path.GetDirectoryName(Config.ConfigFilePath), $"{GUID}.cfg");
-    if (File.Exists(legacyConfig)) {
-      if (File.Exists(config))
-        File.Delete(legacyConfig);
-      else
-        File.Move(legacyConfig, config);
-    }
     Configuration.Init(ConfigSync, Config);
-    Harmony harmony = new(GUID);
-    harmony.PatchAll();
+    new Harmony(GUID).PatchAll();
   }
 }
 

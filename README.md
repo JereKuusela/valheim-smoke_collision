@@ -1,9 +1,33 @@
-# valheim-smoke_collision
+# Smoke collision
 
-This project is a mod to game called Valheim.
+Makes the smoke ignore certain structures. Also allows changing the smoke size and properties.
 
-To compile, you need to manually add correct libraries to Libs folder. Check project file for needed ones.
+Install on the client (modding [guide](https://youtu.be/L9ljm2eKLrk)).
 
-- Download BepInEx for Valheim and use DLLs from core and unstripped_corlib folders.
-- Valheim DLLs can be found from Valheim_Data/Manageed folder.
-- DLLS which end with _publicized require using https://github.com/CabbageCrow/AssemblyPublicizer.
+Install on the server if want to sync the config.
+
+# Configuration
+
+The config file has a list of object ids that are ignored by the smoke. Check [here](https://valheim.fandom.com/wiki/Item_IDs) for object ids.
+
+By default following structures let the smoke pass:
+
+- Cage Floor 1x1
+- Cage Floor 2x2
+- Cage Wall 1x1
+- Cage Wall 2x2
+- Carved Darkwood divider
+- Iron gate
+- Wood ladder
+- Wood stair
+
+There are also settings to change smoke properties:
+
+- Collider size multiplier (default `1`): Affects only the collider size.
+- Fade time (default `2`): Seconds to disappear after max amount or max duration.
+- Force (default `2`): Multiplies acceleration (how quickly target velocity is reached).
+- Max amount (default `100`): Maximum amount of smoke.
+- Max duration (default `60`): Seconds until starting to fade.
+- Random horizontal velocity (default `0.15`): Random horizontal velocity.
+- Smoke size multiplier (default `1`): Affects both visual and the collider size.
+- Vertical velocity (default `0.75`): Maximum vertical velocity.

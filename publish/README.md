@@ -32,7 +32,14 @@ There are also settings to change smoke properties:
 - Smoke size multiplier (default `1`): Affects both visual and the collider size.
 - Vertical velocity (default `0.75`): Maximum vertical velocity.
 
+Sources: [GitHub](https://github.com/JereKuusela/valheim-smoke_collision)
+
+Donations: [Buy me a computer](https://www.buymeacoffee.com/jerekuusela)
+
 # Changelog
+
+- v1.4
+	- Fixes the black screen.
 
 - v1.3
 	- Fixes some object ids not working.
