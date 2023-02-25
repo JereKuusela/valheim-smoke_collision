@@ -5,25 +5,29 @@ using HarmonyLib;
 using UnityEngine;
 namespace SmokeCollision;
 [BepInPlugin(GUID, NAME, VERSION)]
-public class SmokeCollision : BaseUnityPlugin {
+public class SmokeCollision : BaseUnityPlugin
+{
   public const string GUID = "smoke_collision";
   public const string NAME = "Smoke Collision";
-  public const string VERSION = "1.4";
+  public const string VERSION = "1.5";
   ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,
     CurrentVersion = VERSION,
     MinimumRequiredVersion = "1.4"
   };
-  public void Awake() {
+  public void Awake()
+  {
     Configuration.Init(ConfigSync, Config);
     new Harmony(GUID).PatchAll();
   }
 }
 
 [HarmonyPatch(typeof(Smoke), nameof(Smoke.Awake))]
-public class Smoke_Awake {
-  static void Postfix(Smoke __instance) {
+public class Smoke_Awake
+{
+  static void Postfix(Smoke __instance)
+  {
     __instance.gameObject.AddComponent<CollisionDisabler>();
     if (Configuration.SizeMultiplier != 1f)
       __instance.transform.localScale *= Configuration.SizeMultiplier;
@@ -39,8 +43,10 @@ public class Smoke_Awake {
 }
 
 [HarmonyPatch(typeof(SmokeSpawner), nameof(SmokeSpawner.Spawn))]
-public class SpawnSmoke {
-  static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+public class SpawnSmoke
+{
+  static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+  {
     var matcher = new CodeMatcher(instructions).MatchForward(false, new CodeMatch(OpCodes.Ldc_I4_S, (sbyte)100))
       .SetAndAdvance(OpCodes.Call, Transpilers.EmitDelegate(() => Configuration.MaxAmount).operand);
     return matcher.InstructionEnumeration();

@@ -32,11 +32,19 @@ There are also settings to change smoke properties:
 - Smoke size multiplier (default `1`): Affects both visual and the collider size.
 - Vertical velocity (default `0.75`): Maximum vertical velocity.
 
+Other setings:
+
+- Required space (default `0.5`): Clear space needed above fireplaces (meters). 0 disables the check.
+
 Sources: [GitHub](https://github.com/JereKuusela/valheim-smoke_collision)
 
 Donations: [Buy me a computer](https://www.buymeacoffee.com/jerekuusela)
 
 # Changelog
+
+- v1.5
+	- Adds a new setting "Required space" to change how much free space is needed above fireplaces.
+	- Fixes ignored objects being included in the required space check.
 
 - v1.4
 	- Fixes the black screen.

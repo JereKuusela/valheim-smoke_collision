@@ -5,7 +5,8 @@ using BepInEx.Configuration;
 using ServerSync;
 using Service;
 namespace SmokeCollision;
-public class Configuration {
+public class Configuration
+{
 #nullable disable
   public static ConfigEntry<bool> configLocked;
   public static ConfigEntry<string> configIgnoredIds;
@@ -17,6 +18,7 @@ public class Configuration {
   public static ConfigEntry<string> configMaxAmount;
   public static ConfigEntry<string> configFadeTime;
   public static ConfigEntry<string> configForce;
+  public static ConfigEntry<string> configRequiredSpace;
 #nullable enable
   public static float SizeMultiplier = 1f;
   public static float ColliderMultiplier = 1f;
@@ -32,24 +34,31 @@ public class Configuration {
   public static float FadeTime = FADE_TIME;
   const float FORCE = 2f;
   public static float Force = FORCE;
+  const float REQUIRED_SPACE = 0.5f;
+  public static float RequiredSpace = REQUIRED_SPACE;
   public static HashSet<string> IgnoredIds = new();
-  private static void ParseIds() {
+  private static void ParseIds()
+  {
     IgnoredIds = configIgnoredIds.Value.Split(',').Select(s => s.Trim().ToLower()).ToHashSet();
   }
-  public static float ParseFloat(string value, float defaultValue = 0) {
+  public static float ParseFloat(string value, float defaultValue = 0)
+  {
     if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var result)) return result;
     return defaultValue;
   }
-  public static int ParseInt(string value, int defaultValue = 0) {
+  public static int ParseInt(string value, int defaultValue = 0)
+  {
     if (int.TryParse(value, out var result)) return result;
     return defaultValue;
   }
 
-  private static void Clean() {
+  private static void Clean()
+  {
     foreach (var smoke in Smoke.m_smoke)
       UnityEngine.Object.Destroy(smoke.gameObject);
   }
-  public static void Init(ConfigSync configSync, ConfigFile configFile) {
+  public static void Init(ConfigSync configSync, ConfigFile configFile)
+  {
     ConfigWrapper wrapper = new("smoke_config", configFile, configSync);
     var section = "General";
     configLocked = wrapper.BindLocking(section, "Config locked", false, "When true, server sets the config values.");
@@ -57,59 +66,74 @@ public class Configuration {
     configIgnoredIds.SettingChanged += (s, e) => ParseIds();
     ParseIds();
     configSizeMultiplier = wrapper.Bind(section, "Smoke size multiplier", "1", "Changes the size of the smoke object (including the collider).");
-    configSizeMultiplier.SettingChanged += (s, e) => {
+    configSizeMultiplier.SettingChanged += (s, e) =>
+    {
       SizeMultiplier = ParseFloat(configSizeMultiplier.Value, 1f);
       Clean();
     };
     SizeMultiplier = ParseFloat(configSizeMultiplier.Value, 1f);
 
     configColliderMultiplier = wrapper.Bind(section, "Collider size multiplier", "1", "Changes only the collider size.");
-    configColliderMultiplier.SettingChanged += (s, e) => {
+    configColliderMultiplier.SettingChanged += (s, e) =>
+    {
       ColliderMultiplier = ParseFloat(configColliderMultiplier.Value, 1f);
       Clean();
     };
     ColliderMultiplier = ParseFloat(configColliderMultiplier.Value, 1f);
 
     configMaxDuration = wrapper.Bind(section, "Max duration", MAX_DURATION.ToString(), "Seconds until starting to fade.");
-    configMaxDuration.SettingChanged += (s, e) => {
+    configMaxDuration.SettingChanged += (s, e) =>
+    {
       TimeToDisappear = ParseFloat(configMaxDuration.Value, MAX_DURATION);
       Clean();
     };
     TimeToDisappear = ParseFloat(configMaxDuration.Value, MAX_DURATION);
 
     configVerticalVelocity = wrapper.Bind(section, "Vertical velocity", VERTICAL_VELOCITY.ToString("F2"), "Maximum vertical velocity.");
-    configVerticalVelocity.SettingChanged += (s, e) => {
+    configVerticalVelocity.SettingChanged += (s, e) =>
+    {
       VerticalVelocity = ParseFloat(configVerticalVelocity.Value, VERTICAL_VELOCITY);
       Clean();
     };
     VerticalVelocity = ParseFloat(configVerticalVelocity.Value, VERTICAL_VELOCITY);
 
     configRandomHorizontalVelocity = wrapper.Bind(section, "Random horizontal velocity", RANDOM_HORIZONTAL_VELOCITY.ToString("F2"), "Random horizontal velocity.");
-    configRandomHorizontalVelocity.SettingChanged += (s, e) => {
+    configRandomHorizontalVelocity.SettingChanged += (s, e) =>
+    {
       RandomHorizontalVelocity = ParseFloat(configRandomHorizontalVelocity.Value, RANDOM_HORIZONTAL_VELOCITY);
       Clean();
     };
     RandomHorizontalVelocity = ParseFloat(configRandomHorizontalVelocity.Value, RANDOM_HORIZONTAL_VELOCITY);
 
     configMaxAmount = wrapper.Bind(section, "Max amount", MAX_AMOUNT.ToString(), "Maximum amount of smoke.");
-    configMaxAmount.SettingChanged += (s, e) => {
+    configMaxAmount.SettingChanged += (s, e) =>
+    {
       MaxAmount = ParseInt(configMaxAmount.Value, MAX_AMOUNT);
       Clean();
     };
     MaxAmount = ParseInt(configMaxAmount.Value, MAX_AMOUNT);
 
     configFadeTime = wrapper.Bind(section, "Fade time", FADE_TIME.ToString(), "Seconds to disappear after max amount or max duration.");
-    configFadeTime.SettingChanged += (s, e) => {
+    configFadeTime.SettingChanged += (s, e) =>
+    {
       FadeTime = ParseFloat(configFadeTime.Value, FADE_TIME);
       Clean();
     };
     FadeTime = ParseFloat(configFadeTime.Value, FADE_TIME);
 
     configForce = wrapper.Bind(section, "Force", FORCE.ToString(), "Multiplies acceleration (how quickly target velocity is reached).");
-    configForce.SettingChanged += (s, e) => {
+    configForce.SettingChanged += (s, e) =>
+    {
       Force = ParseFloat(configForce.Value, FORCE);
       Clean();
     };
     Force = ParseFloat(configForce.Value, FORCE);
+
+    configRequiredSpace = wrapper.Bind(section, "Required space", REQUIRED_SPACE.ToString(), "Clear space needed above fireplaces (meters). 0 disables the check.");
+    configRequiredSpace.SettingChanged += (s, e) =>
+    {
+      RequiredSpace = ParseFloat(configRequiredSpace.Value, REQUIRED_SPACE);
+    };
+    RequiredSpace = ParseFloat(configRequiredSpace.Value, REQUIRED_SPACE);
   }
 }

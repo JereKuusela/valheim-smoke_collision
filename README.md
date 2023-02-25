@@ -31,3 +31,7 @@ There are also settings to change smoke properties:
 - Random horizontal velocity (default `0.15`): Random horizontal velocity.
 - Smoke size multiplier (default `1`): Affects both visual and the collider size.
 - Vertical velocity (default `0.75`): Maximum vertical velocity.
+
+Other setings:
+
+- Required space (default `0.5`): Clear space needed above fireplaces (meters). 0 disables the check.
