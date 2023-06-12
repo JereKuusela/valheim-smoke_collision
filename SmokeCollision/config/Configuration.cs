@@ -54,7 +54,7 @@ public class Configuration
 
   private static void Clean()
   {
-    foreach (var smoke in Smoke.m_smoke)
+    foreach (var smoke in Smoke.s_smoke)
       UnityEngine.Object.Destroy(smoke.gameObject);
   }
   public static void Init(ConfigSync configSync, ConfigFile configFile)

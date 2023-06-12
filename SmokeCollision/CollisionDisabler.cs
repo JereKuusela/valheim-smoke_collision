@@ -7,11 +7,13 @@ namespace SmokeCollision;
 public class CollisionDisabler : MonoBehaviour
 {
   public static bool IsIgnored(Collider collider) => Configuration.IgnoredIds.Contains(Utils.GetPrefabName(collider.transform.root.gameObject).ToLower());
+#pragma warning disable IDE0051
   private void OnCollisionEnter(Collision collision)
   {
     if (IsIgnored(collision.collider))
       Physics.IgnoreCollision(base.GetComponent<Collider>(), collision.collider, true);
   }
+#pragma warning restore IDE0051
 
 }
 
