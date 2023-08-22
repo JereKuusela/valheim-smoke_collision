@@ -13,7 +13,8 @@ public class SmokeCollision : BaseUnityPlugin
   readonly ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,
-    CurrentVersion = VERSION
+    CurrentVersion = VERSION,
+    MinimumRequiredVersion = VERSION
   };
   public void Awake()
   {
