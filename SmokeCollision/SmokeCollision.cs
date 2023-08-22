@@ -9,12 +9,11 @@ public class SmokeCollision : BaseUnityPlugin
 {
   public const string GUID = "smoke_collision";
   public const string NAME = "Smoke Collision";
-  public const string VERSION = "1.6";
+  public const string VERSION = "1.7";
   readonly ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,
-    CurrentVersion = VERSION,
-    MinimumRequiredVersion = "1.6"
+    CurrentVersion = VERSION
   };
   public void Awake()
   {
