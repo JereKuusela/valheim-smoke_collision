@@ -1,3 +1,6 @@
+- v1.8
+  - Fixed for the new update.
+
 - v1.7
   - Fixed for the new update.
 
@@ -10,6 +13,3 @@
 
 - v1.4
   - Fixes the black screen.
-
-- v1.3
-  - Fixes some object ids not working.
