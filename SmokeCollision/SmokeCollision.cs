@@ -9,7 +9,7 @@ public class SmokeCollision : BaseUnityPlugin
 {
   public const string GUID = "smoke_collision";
   public const string NAME = "Smoke Collision";
-  public const string VERSION = "1.8";
+  public const string VERSION = "1.9";
   readonly ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,
@@ -36,7 +36,7 @@ public class Smoke_Awake
     __instance.m_ttl = Configuration.TimeToDisappear;
     __instance.m_vel = new(0f, Configuration.VerticalVelocity, 0f);
     __instance.m_randomVel = Configuration.RandomHorizontalVelocity;
-    __instance.m_vel += Quaternion.Euler(0f, (float)UnityEngine.Random.Range(0, 360), 0f) * Vector3.forward * __instance.m_randomVel;
+    __instance.m_vel += Quaternion.Euler(0f, Random.Range(0, 360), 0f) * Vector3.forward * __instance.m_randomVel;
     __instance.m_force = Configuration.Force;
     __instance.m_fadetime = Configuration.FadeTime;
   }
