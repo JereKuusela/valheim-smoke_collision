@@ -17,7 +17,7 @@ public class ConfigWrapper
     ConfigFile = configFile;
     ConfigSync = configSync;
 
-    new Terminal.ConsoleCommand(command, "[key] [value] - Toggles or sets a config value.", (Terminal.ConsoleEventArgs args) =>
+    new Terminal.ConsoleCommand(command, "[key] [value] - Toggles or sets a config value.", args =>
     {
       if (args.Length < 2) return;
       if (!SettingHandlers.TryGetValue(args[1].ToLower(), out var handler)) return;
@@ -25,7 +25,7 @@ public class ConfigWrapper
         handler(args.Context, "");
       else
         handler(args.Context, string.Join(" ", args.Args.Skip(2)));
-    }, optionsFetcher: () => SettingHandlers.Keys.ToList());
+    }, optionsFetcher: () => [.. SettingHandlers.Keys]);
   }
   public ConfigEntry<bool> BindLocking(string group, string name, bool value, ConfigDescription description)
   {

@@ -6,9 +6,9 @@ Install on the client (modding [guide](https://youtu.be/L9ljm2eKLrk)).
 
 Install on the server if want to sync the config.
 
-# Configuration
+## Configuration
 
-The config file has a list of object ids that are ignored by the smoke. Check [here](https://valheim.fandom.com/wiki/Item_IDs) for object ids.
+The config file has a list of object ids that are ignored by the smoke. Check [here](https://valheim.wiki/Item_IDs) for object ids.
 
 By default following structures let the smoke pass:
 
